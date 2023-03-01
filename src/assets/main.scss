@@ -1,0 +1,16 @@
+html {
+  background-color: #CDDDEA;
+  font-size: 12px;
+  width: 100%;
+  .main-content {
+    width: inherit;
+    padding: 3.33rem;
+    .main-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 400;
+      font-size: 2rem;
+    }
+  }
+}
