@@ -13,4 +13,9 @@ html {
       font-size: 2.5rem;
     }
   }
+  .card-wrapper {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
 }

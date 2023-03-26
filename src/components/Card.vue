@@ -29,7 +29,7 @@ export default {
   computed: {
     link() {
       if (this.themeId !== null) {
-        return `/posts/${this.themeId}`;
+        return `/posts?themeId=${this.themeId}`;
       }
       if (this.postId !== null) {
         return `/post/${this.postId}`;
