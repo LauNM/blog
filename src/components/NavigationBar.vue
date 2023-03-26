@@ -11,7 +11,7 @@ import { RouterLink } from 'vue-router'
   <nav class="navbar" :class="{ 'responsive-navbar-hidden': hidden }">
     <RouterLink @click="hidden = true" to="/">Histoire</RouterLink>
     <RouterLink @click="hidden = true" to="/themes">Les thèmes</RouterLink>
-    <RouterLink @click="hidden = true" to="/articles">Tous les articles</RouterLink>
+    <RouterLink @click="hidden = true" to="/posts">Tous les articles</RouterLink>
     <RouterLink @click="hidden = true" to="/contact">Contact</RouterLink>
   </nav>
 </template>

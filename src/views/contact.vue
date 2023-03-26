@@ -1,10 +1,10 @@
 <template>
-  <h2 class="main-title">Article</h2>
+  <h2 class="main-title">Contact</h2>
 </template>
 
 <script>
 export default {
-  name: "articleView"
+  name: "contact"
 }
 </script>
 

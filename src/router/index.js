@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import historyView from '../views/historyView.vue'
-import themesView from "../views/themesView.vue";
-import allArticlesView from "../views/allArticlesView.vue";
-import articleView from "../views/articleView.vue";
-import contactView from "../views/contactView.vue";
+import history from '../views/history.vue'
+import themes from "../views/themes.vue";
+import AllPosts from "../views/allPosts.vue";
+import post from "../views/post.vue";
+import contact from "../views/contact.vue";
 import notFound from "../views/notFound.vue";
 
 const router = createRouter({
@@ -12,27 +12,27 @@ const router = createRouter({
     {
       path: '/',
       name: 'history',
-      component: historyView
+      component: history
     },
     {
       path: '/themes',
       name: 'themes',
-      component: themesView
+      component: themes
     },
     {
-      path: '/articles',
-      name: 'articles',
-      component: allArticlesView
+      path: '/posts',
+      name: 'posts',
+      component: AllPosts
     },
     {
-      path: '/article/:id',
-      name: 'article',
-      component: articleView
+      path: '/post/:id',
+      name: 'post',
+      component: post
     },
     {
       path: '/contact',
       name: 'contact',
-      component: contactView
+      component: contact
     },
     { path: '/:pathMatch(.*)*',
       name: 'NotFound',
