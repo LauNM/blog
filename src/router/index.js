@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import history from '../views/history.vue'
-import themes from "../views/themes.vue";
-import AllPosts from "../views/allPosts.vue";
+import history from '../pages/history.vue'
+import theme from "../views/theme.vue";
+import allPosts from "../views/allPosts.vue";
 import post from "../views/post.vue";
-import contact from "../views/contact.vue";
-import notFound from "../views/notFound.vue";
+import contact from "../pages/contact.vue";
+import notFound from "../pages/notFound.vue";
+import themes from "@/pages/themes.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,10 +23,10 @@ const router = createRouter({
     {
       path: '/posts',
       name: 'posts',
-      component: AllPosts
+      component: allPosts
     },
     {
-      path: '/post/:id',
+      path: '/posts/:id',
       name: 'post',
       component: post
     },

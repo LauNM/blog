@@ -7,6 +7,7 @@
         :name="post.title"
         :post-id="post.id"
         :text="post.summary"
+        @click="goToPost(post.id)"
     />
   </div>
 </template>
@@ -14,7 +15,6 @@
 <script>
 import BackendConnector from '@/plugins/backend-connector';
 import Card from "../components/Card.vue";
-import {useRoute} from "vue-router";
 export default {
   name: "posts",
   components: {
@@ -23,21 +23,37 @@ export default {
   data() {
     return {
       posts: [],
+      id: null,
       filter: [],
     };
   },
   mounted() {
-    const route = useRoute();
-    this.filter = [Object.keys(route.query), Object.values(route.query)]
-    console.log(route.query);
+    this.filter = this.$route.query;
+    this.formatFilters()
     this.getPosts();
   },
   methods: {
+    formatFilters() {
+      let string = '';
+      Object.entries(this.filter).forEach((key, value) => {
+        console.log(key, value);
+        string.concat(`${key}=${value}`);
+      })
+      return string;
+    },
     getPosts() {
-      BackendConnector.get('/posts')
+      if (Object.keys(this.filter).length !== 0) {
+        BackendConnector.get('/post/')
+         .then(response => this.posts = response.data)
+         .catch(error => console.log(error));
+      }
+      BackendConnector.get('/post')
           .then(response => this.posts = response.data)
           .catch(error => console.log(error));
     },
+    goToPost(id) {
+      this.$router.push(`/posts/${id}`)
+    }
   },
 }
 </script>

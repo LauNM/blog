@@ -1,5 +1,5 @@
 <template>
-  <div class="theme-card" @click="$router.push(link)">
+  <div class="theme-card">
     <h2>{{ name }}</h2>
     <p>{{text}}</p>
   </div>
@@ -26,17 +26,6 @@ export default {
       default: null,
     }
   },
-  computed: {
-    link() {
-      if (this.themeId !== null) {
-        return `/posts?themeId=${this.themeId}`;
-      }
-      if (this.postId !== null) {
-        return `/post/${this.postId}`;
-      }
-      return null;
-    }
-  }
 }
 </script>
 

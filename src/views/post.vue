@@ -1,7 +1,10 @@
 <template>
-  <h2 class="main-title">{{ post.title }}</h2>
-  <p>Par: {{post.author}}, le {{post.createdAt}}</p>
-  <div>{{post.content}}</div>
+  <div v-if="isLoading">Loading</div>
+  <div v-else>
+    <h2 class="main-title">{{ post.title }}</h2>
+    <p>Par: {{post.author}}, le {{post.createdAt}}</p>
+    <div>{{post.content}}</div>
+  </div>
 </template>
 
 <script>
@@ -11,20 +14,24 @@ export default {
   name: "post",
   data() {
     return {
+      isLoading: false,
       post: {},
       id: null,
     };
   },
-  mounted() {
+  async mounted() {
     const route = useRoute();
+    console.log(route.params)
     this.id = route.params.id;
-    this.getPost();
+    await this.getPost();
   },
   methods: {
-    getPost() {
-      BackendConnector.get(`/posts/${this.id}`)
-          .then(response => this.post = response.data[0])
-          .catch(error => console.log(error));
+    async getPost() {
+      this.isLoading = true;
+      BackendConnector.get(`/post/${this.id}`)
+        .then(response => this.post = response.data)
+        .catch(error => console.log(error));
+      this.isLoading = false;
     }
   }
 }
