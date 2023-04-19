@@ -24,30 +24,27 @@ export default {
     return {
       posts: [],
       id: null,
-      filter: [],
     };
   },
   mounted() {
-    this.filter = this.$route.query;
-    this.formatFilters()
     this.getPosts();
   },
-  methods: {
-    formatFilters() {
-      let string = '';
-      Object.entries(this.filter).forEach((key, value) => {
-        console.log(key, value);
-        string.concat(`${key}=${value}`);
-      })
-      return string;
-    },
-    getPosts() {
-      if (Object.keys(this.filter).length !== 0) {
-        BackendConnector.get('/post/')
-         .then(response => this.posts = response.data)
-         .catch(error => console.log(error));
+  watch: {
+    filters(newFilters, oldFilters) {
+      if (newFilters !== oldFilters) {
+        this.getPosts();
       }
-      BackendConnector.get('/post')
+    }
+  },
+  computed: {
+    filters() {
+      const route = this.$route.fullPath.split('?')[1] ?? null;
+      return route ? `?${route}` : '';
+    }
+  },
+  methods: {
+    getPosts() {
+      BackendConnector.get(`/post${this.filters}`)
           .then(response => this.posts = response.data)
           .catch(error => console.log(error));
     },
