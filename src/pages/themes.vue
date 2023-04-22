@@ -25,9 +25,22 @@ export default {
   mounted() {
     this.getThemes();
   },
+  watch: {
+    filters(newFilters, oldFilters) {
+      if (newFilters !== oldFilters) {
+        this.getPosts();
+      }
+    }
+  },
+  computed: {
+    filters() {
+      const route = this.$route.fullPath.split('?')[1] ?? null;
+      return route ? `?${route}` : '';
+    }
+  },
   methods: {
     getThemes() {
-      BackendConnector.get('/theme')
+      BackendConnector.get(`/theme${this.filters}`)
         .then(response => this.themes = response.data)
         .catch(error => console.log(error));
     },
